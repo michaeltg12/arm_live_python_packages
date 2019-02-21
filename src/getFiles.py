@@ -30,7 +30,7 @@ else:
     import logging
     logger = logging.getLogger(__name__)
 HELP_DESCRIPTION = """
-*************************** ARM LIVE UTILITY TOOL ****************************
+*************************** ARM LIVE UTILITY TOOL ***************************************
 This tool will help users utilize the ARM Live Data Webservice to download ARM data.
 This programmatic interface allows users to query and automate machine-to-machine
 downloads of ARM data. This tool uses a REST URL and specific parameters (saveData,
@@ -44,11 +44,11 @@ disk (on HPSS), will have to go through the regular ordering process. More infor
 about this REST API and tools can be found at: https://adc.arm.gov/armlive/#scripts
 
 To login/register for an access token visit: https://adc.arm.gov/armlive/livedata/home.
-----------------------------******************************************************************************
+******************************************************************************************
 """
-EXAMPLE = """
-Example:
+EXAMPLE = """Example:
 python getFiles.py -u userName:XXXXXXXXXXXXXXXX -ds sgpmetE13.b1 -s 2017-01-14 -e 2017-01-20
+getARMFiles -u userName:XXXXXXXXXXXXXXXX -ds sgpmetE13.b1 -s 2017-01-14 -e 2017-01-20
 """
 
 def parse_arguments():
@@ -60,17 +60,17 @@ def parse_arguments():
         The second return arg contains unexpected command line flags and arguments.
     """
     parser = argparse.ArgumentParser(description=HELP_DESCRIPTION, epilog=EXAMPLE,
-                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+                                     formatter_class=argparse.RawTextHelpFormatter)
     required_arguments = parser.add_argument_group("required arguments")
 
     required_arguments.add_argument("-u", "--user", type=str, dest="user", required=True,
-                                    help="The user's ARM ID and access token, separated by a colon."
+                                    help="The user's ARM ID and access token, separated by a colon.\n"
                                          "Obtained from https://adc.arm.gov/armlive/livedata/home")
     required_arguments.add_argument("-ds", "--datastream", type=str, dest="datastream",
-                                    help="Name of the datastream. The query service type allows the"
-                                         "user to enter a DATASTREAM property that's less specific,"
-                                         "and returns a collection of data files that match the"
-                                         "DATASTREAM property. For example: sgp30ebbrE26.b1")
+                                    help="Name of the datastream. The query service type allows the\n"
+                                         "user to enter a DATASTREAM property that's less specific,\n"
+                                         "and returns a collection of data files that match the\n"
+                                         "DATASTREAM property. For example: sgp30ebbrE26.b1\n")
 
     parser.add_argument("-s", "--start", type=str, dest="start",
                         help="Optional; start date for the datastream. "
@@ -79,11 +79,11 @@ def parse_arguments():
                         help="Optional; end date for the datastream. "
                              "Must be of the form YYYY-MM-DD")
     parser.add_argument("-o", "--out", type=str, dest="output", default='',
-                        help="Optional; full path to directory where you would like the output"
-                             "files. Defaults to folder named after datastream in current working"
+                        help="Optional; full path to directory where you would like the output\n"
+                             "files. Defaults to folder named after datastream in current working\n"
                              "directory.")
     parser.add_argument("-T", "--test", action="store_true", dest="test",
-                        help="Optional; flag that enables test mode. When in test mode only the"
+                        help="Optional; flag that enables test mode. When in test mode only the\n"
                              "query will be run.")
     parser.add_argument("-D", "--Debug", action="store_true", dest="debug",
                         help="Optional; flag that enables debug printing")
